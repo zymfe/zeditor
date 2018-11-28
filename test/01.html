@@ -13,7 +13,78 @@
 				width: 300px;
 				height: 100px;
 				border: 1px solid #f00;
+			}<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+		<title>Document</title>
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<style type="text/css">
+			#context {
+				width: 300px;
+				height: 100px;
+				border: 1px solid #f00;
 			}
+		</style>
+	</head>
+	<body>
+		<div id="context" contenteditable></div>
+		<button id="btn">按钮</button>		
+		<button id="btn1">添加链接</button>
+		<button id="btn2">获取内容</button>
+
+		<div id="container"></div>
+
+
+		<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+		<script type="text/javascript">
+			;(function () {
+
+				document.querySelector('#context').addEventListener('paste', function () {
+					console.log(456);
+				});
+
+				document.querySelector('#btn').addEventListener('click', function () {
+					var text = '';
+					if (window.getSelection) {
+						console.log(1);
+							text = window.getSelection().toString();
+					} else if (document.selection && document.selection.type != "Control") {
+						console.log(2);
+							text = document.selection.createRange().text;
+					}
+					document.execCommand("Italic",false,null);
+					document.execCommand("insertHtml", false, '<img src="http://www.0351zhuangxiu.com/uploads/images/123.jpg" width="30" height="30">');
+					console.log(text);
+				});
+
+				document.querySelector('#btn1').addEventListener('click', function () {
+					var text = '';
+					if (window.getSelection) {
+						console.log(1);
+						console.log(window.getSelection());
+							text = window.getSelection().toString();
+					} else if (document.selection && document.selection.type != "Control") {
+						console.log(2);
+							text = document.selection.createRange().text;
+					}
+					document.execCommand("insertHtml", false, '<a href="http://www.baidu.com">'+window.getSelection().baseNode.innerHTML+'</a>');
+				});
+
+				document.querySelector('#btn2').addEventListener('click', function () {
+					var innerHTML = document.querySelector('#context').innerHTML;
+					document.querySelector('#container').innerHTML = innerHTML;
+				})
+
+
+			})();
+		</script>
+	</body>
+</html>
 		</style>
 	</head>
 	<body>
